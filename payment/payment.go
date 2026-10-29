@@ -45,7 +45,8 @@ type PaymentMethod interface {
 //   - Balance    float64
 type CreditCard struct {
 	Transaction
-	// TODO: ваші поля тут
+	CardNumber string
+	Balance    float64
 }
 
 // CryptoWallet — Завдання 1.3.
@@ -55,7 +56,8 @@ type CreditCard struct {
 //   - TokenBalance  float64
 type CryptoWallet struct {
 	Transaction
-	// TODO: ваші поля тут
+	WalletAddress string
+	TokenBalance  float64
 }
 
 // Pay реалізує PaymentMethod для CreditCard (Завдання 1.4).
@@ -68,18 +70,26 @@ type CryptoWallet struct {
 // TODO (Завдання 1.4): приймач тут має бути ВКАЗІВНИКОМ (*CreditCard).
 // Метод змінює баланс — приймач-значення призведе до тієї самої
 // "мовчазної" помилки, яку ми розбирали на занятті.
-func (c CreditCard) Pay(amount float64) error {
-	// TODO: ваш код тут
-	return errors.New("not implemented")
+func (c *CreditCard) Pay(amount float64) error {
+	if c.Balance >= amount {
+		c.Balance -= amount
+		return nil
+	} else {
+		return errors.New("insufficient balance")
+	}
 }
 
 // Pay реалізує PaymentMethod для CryptoWallet (Завдання 1.4).
 // Правила ті самі, що і для CreditCard, але для TokenBalance.
 //
 // TODO (Завдання 1.4): приймач має бути ВКАЗІВНИКОМ (*CryptoWallet).
-func (w CryptoWallet) Pay(amount float64) error {
-	// TODO: ваш код тут
-	return errors.New("not implemented")
+func (w *CryptoWallet) Pay(amount float64) error {
+	if w.TokenBalance >= amount {
+		w.TokenBalance -= amount
+		return nil
+	} else {
+		return errors.New("insufficient balance")
+	}
 }
 
 // ProcessPayment — поліморфна функція (Завдання 1.5).

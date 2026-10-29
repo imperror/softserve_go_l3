@@ -13,9 +13,8 @@
 - **бажаний формат виводу** (наприклад, "поверни лише Go-код у трьох
   блоках: інтерфейс, сервіс, мок").
 
-<!-- TODO(розділ-2): видаліть цей HTML-коментар і вставте текст
-     вашого промпту нижче цього рядка, звичайним видимим текстом
-     Markdown. -->
+
 
 ## Мій промпт
 
+You're an experienced Go Software developer, specialyzing on code review , clean architectre, please take a look at ./orders and dedicate minimal interface 'OrderStore' , rewrite OrderService into a dependency injection, generate mock. Do the minimal required changes, create minimal effective diff required too meet task goal. Idiomatic go code. 
